@@ -11,10 +11,15 @@ import ru.yandex.praktikum.EnvConfig;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
+import static ru.praktikum.scooter.page.object.StaticLocators.getCLOSECOOKIE;
 
 public class MethodsForFAQ {
     //Локатор для скролла
-    public final By scrollToOFAQ = By.xpath(".//div[text()='Вопросы о важном']");
+    private final By scrollToOFAQ = By.xpath(".//div[text()='Вопросы о важном']");
+    private final String staticPartOfXpathForPanelWithQuestion = "accordion__heading-";
+    private final String staticPartOfXpathForPanelWithAnswer = "accordion__panel-";
+
+
     private final WebDriver driver;
 
 
@@ -25,7 +30,7 @@ public class MethodsForFAQ {
     //открытие страницы
     public void openPage() {
         driver.get(EnvConfig.BASE_URL);
-        driver.findElement(EnvConfig.CLOSECOOKIE).click();
+        driver.findElement(getCLOSECOOKIE()).click();
     }
 
     //скролл и ождание элемента
@@ -37,14 +42,14 @@ public class MethodsForFAQ {
 
     //выбор вопроса из FAQ
     public void clickOnButtonAndWait(int indexOfAnswer) {
-        driver.findElement(By.id("accordion__heading-" + indexOfAnswer)).click();
-        By panelWithAnswer = By.id("accordion__panel-" + indexOfAnswer);
+        driver.findElement(By.id(staticPartOfXpathForPanelWithQuestion + indexOfAnswer)).click();
+        By panelWithAnswer = By.id(staticPartOfXpathForPanelWithAnswer + indexOfAnswer);
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(panelWithAnswer));
     }
 
     //получаем текст ответа
     public String getTextFromAnswer(int indexOfAnswer) {
-        By panelWithAnswer = By.id("accordion__panel-" + indexOfAnswer);
+        By panelWithAnswer = By.id(staticPartOfXpathForPanelWithAnswer + indexOfAnswer);
         return driver.findElement(panelWithAnswer).getText();
     }
 

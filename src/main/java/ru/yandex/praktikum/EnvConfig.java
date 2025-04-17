@@ -14,9 +14,4 @@ public class EnvConfig {
     public static final String SEVENTH_ANSWER = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
     public static final String EIGHTH_ANSWER = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
     public static final String EXPECTED_ANSWER_AFTER_SUCCESSFUL_ORDER = "Заказ оформлен";
-    public static final By HEAD_ORDER_BUTTON = By.xpath(".//div[@class='Header_Nav__AGCXC']/button[text()='Заказать']");
-    public static final By MIDDLE_ORDER_BUTTON = By.cssSelector(".Button_Middle__1CSJM.Button_Button__ra12g");
-    public static final By CLOSECOOKIE = By.xpath(".//button[text()='да все привыкли']");
-
-
-}
+   }

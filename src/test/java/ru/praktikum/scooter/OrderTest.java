@@ -9,10 +9,13 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.praktikum.scooter.page.object.MethodsForOrder;
-import ru.yandex.praktikum.EnvConfig;
 
 import java.time.Duration;
+
+import static ru.praktikum.scooter.page.object.StaticLocators.getHeadOrderButton;
+import static ru.praktikum.scooter.page.object.StaticLocators.getMiddleOrderButton;
 
 @RunWith(Parameterized.class)
 public class OrderTest {
@@ -45,19 +48,20 @@ public class OrderTest {
     @Parameterized.Parameters
     public static Object[][] getAnswersInHead() {
         return new Object[][]{
-                {EnvConfig.HEAD_ORDER_BUTTON, "Иван", "Иванов", "Красная площадь, 1", 10, "88005553535", "20.05.2025", "двое суток", "black", "Жемчуг"},
-                {EnvConfig.HEAD_ORDER_BUTTON, "Степан", "Степанов", "Университетский проспект,5", 17, "88002000600", "29.04.2025", "трое суток", "grey", "Безысходность"},
-                {EnvConfig.MIDDLE_ORDER_BUTTON, "Иван", "Иванов", "Красная площадь, 1", 10, "88005553535", "20.05.2025", "двое суток", "black", "Жемчуг"},
-                {EnvConfig.MIDDLE_ORDER_BUTTON, "Степан", "Степанов", "Университетский проспект,5", 17, "88002000600", "29.04.2025", "трое суток", "grey", "Безысходность"},
+                {getHeadOrderButton(), "Иван", "Иванов", "Красная площадь, 1", 10, "88005553535", "20.05.2025", "двое суток", "black", "Жемчуг"},
+                {getHeadOrderButton(), "Степан", "Степанов", "Университетский проспект,5", 17, "88002000600", "29.04.2025", "трое суток", "grey", "Безысходность"},
+                {getMiddleOrderButton(), "Иван", "Иванов", "Красная площадь, 1", 10, "88005553535", "20.05.2025", "двое суток", "black", "Жемчуг"},
+                {getMiddleOrderButton(), "Степан", "Степанов", "Университетский проспект,5", 17, "88002000600", "29.04.2025", "трое суток", "grey", "Безысходность"},
         };
     }
 
     @Before
     public void StartUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        //WebDriverManager.firefoxdriver().setup();
-        //driver = new FirefoxDriver();
+        //WebDriverManager.chromedriver().setup();
+        //driver = new ChromeDriver();
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
     }
@@ -91,4 +95,3 @@ public class OrderTest {
         driver.quit();
     }
 }
-

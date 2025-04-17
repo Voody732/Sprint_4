@@ -4,9 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.praktikum.EnvConfig;
 
+import java.time.Duration;
+
 import static org.junit.Assert.assertEquals;
+import static ru.praktikum.scooter.page.object.StaticLocators.getCLOSECOOKIE;
 import static ru.yandex.praktikum.EnvConfig.EXPECTED_ANSWER_AFTER_SUCCESSFUL_ORDER;
 
 public class MethodsForOrder {
@@ -37,6 +42,9 @@ public class MethodsForOrder {
     private final By yesButtonInOrder = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[text()='Да']");
     //локатор для сообщения об успешном заказе
     private final By actualAnswerAfterSuccessfulOrderPanel = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']");
+    private final String staticPartOfXpathOfMetroStationChoice = ".//button[@value='";
+    private final String staticPartOfXpathOfRentalDurationChoice = ".//div[text()='";
+    private final String staticPartOfXpathOfColorOfScooterChoice = ".//label[@for='";
 
 
     public MethodsForOrder(WebDriver driver) {
@@ -45,18 +53,20 @@ public class MethodsForOrder {
 
     public void openPage() {
         driver.get(EnvConfig.BASE_URL);
-        driver.findElement(EnvConfig.CLOSECOOKIE).click();
+        driver.findElement(getCLOSECOOKIE()).click();
     }
 
     public void clickOnOrderButton(By buttonOfOrder) {
 
         WebElement element = driver.findElement(buttonOfOrder);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(element));
         driver.findElement(buttonOfOrder).click();
     }
 
     public void fillFirstPageOfOrder(String name, String surname, String address, int metroStationIndex, String phoneNumber) {
-        By metroStationChoice = By.xpath(".//button[@value='" + metroStationIndex + "']");
+
+        By metroStationChoice = By.xpath(staticPartOfXpathOfMetroStationChoice + metroStationIndex + "']");
         driver.findElement(nameField).sendKeys(name);
         driver.findElement(surnameField).sendKeys(surname);
         driver.findElement(addressField).sendKeys(address);
@@ -71,8 +81,10 @@ public class MethodsForOrder {
     }
 
     public void fillSecondPageOfOrder(String shippingDate, String rentalDuration, String colorOfScooter, String commentsForCourier) {
-        By rentalDurationChoice = By.xpath(".//div[text()='" + rentalDuration + "']");
-        By colorOfScooterChoice = By.xpath(".//label[@for='" + colorOfScooter + "']");
+
+        By rentalDurationChoice = By.xpath(staticPartOfXpathOfRentalDurationChoice + rentalDuration + "']");
+
+        By colorOfScooterChoice = By.xpath(staticPartOfXpathOfColorOfScooterChoice + colorOfScooter + "']");
         driver.findElement(shippingDateField).sendKeys(shippingDate);
         driver.findElement(toCloseCalendarWindow).click();
         driver.findElement(openRentalDurationList).click();
