@@ -25,17 +25,17 @@ public class AboutImportantTest {
         this.expectedTextOfAnswer = expectedTextOfAnswer;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters (name = "Тестовые данные: {0} {1}")
     public static Object[][] getAnswers() {
         return new Object[][]{
-                {0, EnvConfig.FIRST_ANSWER},
-                {1, EnvConfig.SECOND_ANSWER},
-                {2, EnvConfig.THIRD_ANSWER},
-                {3, EnvConfig.FOURTH_ANSWER},
-                {4, EnvConfig.FIFTH_ANSWER},
-                {5, EnvConfig.SIXTH_ANSWER},
-                {6, EnvConfig.SEVENTH_ANSWER},
-                {7, EnvConfig.EIGHTH_ANSWER},
+                {0, EnvConfig.ANSWER_ABOUT_COST},
+                {1, EnvConfig.ANSWER_ABOUT_ONLY_ONE_SCOOTER},
+                {2, EnvConfig.ANSWER_ABOUT_RENT_START},
+                {3, EnvConfig.ANSWER_ABOUT_ORDER_TODAY},
+                {4, EnvConfig.ANSWER_ABOUT_RENT_PROLONG},
+                {5, EnvConfig.ANSWER_ABOUT_CHARGE},
+                {6, EnvConfig.ANSWER_ABOUT_ORDER_CANCEL},
+                {7, EnvConfig.ANSWER_DELIVERY_LOCATION},
         };
     }
 
@@ -51,7 +51,7 @@ public class AboutImportantTest {
     }
 
     @Test
-    public void checkTextMessageAfterClick() {
+    public void checkTextMessageAfterClickTest() {
         var onMainPage = new MethodsForFAQ(driver);
         //Открыли страницу
         onMainPage.openPage();

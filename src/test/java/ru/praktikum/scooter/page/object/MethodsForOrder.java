@@ -11,7 +11,7 @@ import ru.yandex.praktikum.EnvConfig;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
-import static ru.praktikum.scooter.page.object.StaticLocators.getCLOSECOOKIE;
+import static ru.praktikum.scooter.page.object.MethodsForFAQ.getCLOSECOOKIE;
 import static ru.yandex.praktikum.EnvConfig.EXPECTED_ANSWER_AFTER_SUCCESSFUL_ORDER;
 
 public class MethodsForOrder {

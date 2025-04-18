@@ -11,9 +11,9 @@ import ru.yandex.praktikum.EnvConfig;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
-import static ru.praktikum.scooter.page.object.StaticLocators.getCLOSECOOKIE;
 
 public class MethodsForFAQ {
+    private static final By CLOSECOOKIE = By.xpath(".//button[text()='да все привыкли']");
     //Локатор для скролла
     private final By scrollToOFAQ = By.xpath(".//div[text()='Вопросы о важном']");
     private final String staticPartOfXpathForPanelWithQuestion = "accordion__heading-";
@@ -22,7 +22,9 @@ public class MethodsForFAQ {
 
     private final WebDriver driver;
 
-
+    public static By getCLOSECOOKIE() {
+        return CLOSECOOKIE;
+    }
     public MethodsForFAQ(WebDriver driver) {
         this.driver = driver;
     }
@@ -30,7 +32,7 @@ public class MethodsForFAQ {
     //открытие страницы
     public void openPage() {
         driver.get(EnvConfig.BASE_URL);
-        driver.findElement(getCLOSECOOKIE()).click();
+        driver.findElement(CLOSECOOKIE).click();
     }
 
     //скролл и ождание элемента

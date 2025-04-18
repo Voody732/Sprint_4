@@ -67,7 +67,7 @@ public class OrderTest {
     }
 
     @Test
-    public void checkOrderOnHead() {
+    public void checkOrderOnHeadTest() {
         var orderTest = new MethodsForOrder(driver);
         //открываем страницу
         orderTest.openPage();
